@@ -1,9 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
+
 import React from 'react';
 import styled from 'styled-components/native';
-import { Title, Subtitle, Paragraph} from "./components/Typography";
+import { Title, Subtitle, Paragraph} from "./Typography";
 import { LinearGradient } from 'expo-linear-gradient';
-import { SafeAreaView, ScrollView, Dimensions } from 'react-native';
+import { ScrollView, Dimensions } from 'react-native';
 
 let deviceWidth = Dimensions.get('window').width
 
@@ -34,7 +34,7 @@ const MainImage = styled.ImageBackground`
   width: 100%;
 `;
 
-function Recipe() {
+export default function Recipe() {
 
   return(
     <ScrollView style={{width:deviceWidth}} showsVerticalScrollIndicator={false}>
@@ -67,16 +67,4 @@ function Recipe() {
 
       </ScrollView>
   )
-}
-
-export default function App() {
-  return (
-    <SafeAreaView>
-      <ScrollView style={{width:deviceWidth}} horizontal pagingEnabled showsHorizontalScrollIndicator={false}>
-        <Recipe/>
-        <Recipe/>
-      </ScrollView>
-      <StatusBar style="auto" />
-    </SafeAreaView>
-  );
 }
