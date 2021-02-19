@@ -28,7 +28,7 @@ export function Title({children} : Props) {
     </>;
   }
 
-export function Subtitle({children} : Props) {
+export function Subtitle({children, secondary} : Props2) {
     const [loaded] = useFonts({
       BioRhyme: require('../assets/fonts/BioRhyme-Bold.ttf'),
     });
@@ -38,7 +38,7 @@ export function Subtitle({children} : Props) {
     }
   
     return <>
-        <Text style={{ fontFamily: 'BioRhyme', fontSize: 16, textAlign:"left", color:"#000", opacity:.8 }}>
+        <Text style={{ fontFamily: 'BioRhyme', fontSize: 16, textAlign:"left", color:"#000", opacity: secondary ? .3 : .8 }}>
             { children }
         </Text>
     </>;
