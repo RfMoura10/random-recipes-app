@@ -1,18 +1,15 @@
 import * as React from 'react';
 import { Text } from 'react-native';
 import { useFonts } from 'expo-font';
-import styled from 'styled-components';
 
-type Props = {
-  children: React.ReactNode
-}
-
-type Props2 = {
+type FontProps = {
   children: React.ReactNode,
-  secondary?: boolean
+  secondary?: boolean,
+  big?: boolean,
+  grow?: boolean
 }
 
-export function Title({children} : Props) {
+export function Title({children, big} : FontProps) {
     const [loaded] = useFonts({
       BioRhyme: require('../assets/fonts/BioRhyme-Bold.ttf'),
     });
@@ -22,13 +19,13 @@ export function Title({children} : Props) {
     }
   
     return <>
-        <Text style={{ fontFamily: 'BioRhyme', fontSize: 24, textAlign:"left", color:'#DF8320' }}>
+        <Text style={{ fontFamily: 'BioRhyme', fontSize: 24 * (big ? 2 : 1), textAlign:"left", color:'#DF8320' }}>
             { children }
         </Text>
     </>;
   }
 
-export function Subtitle({children, secondary} : Props2) {
+export function Subtitle({children, big, secondary, grow} : FontProps) {
     const [loaded] = useFonts({
       BioRhyme: require('../assets/fonts/BioRhyme-Bold.ttf'),
     });
@@ -38,13 +35,19 @@ export function Subtitle({children, secondary} : Props2) {
     }
   
     return <>
-        <Text style={{ fontFamily: 'BioRhyme', fontSize: 16, textAlign:"left", color:"#000", opacity: secondary ? .3 : .8 }}>
+        <Text style={{ 
+          fontFamily: 'BioRhyme', 
+          fontSize: 16 * (big ? 2 : 1), 
+          textAlign:"left", 
+          color:"#000", 
+          opacity: secondary ? .3 : .8, 
+          flex: grow && 2}}>
             { children }
         </Text>
     </>;
   }
 
-export function Paragraph({children, secondary} : Props2) {
+export function Paragraph({children, big, secondary} : FontProps) {
     const [loaded] = useFonts({
       Cabin: require('../assets/fonts/Cabin-Bold.ttf'),
     });
@@ -54,7 +57,14 @@ export function Paragraph({children, secondary} : Props2) {
     }
   
     return <>
-        <Text style={{ fontFamily: 'Cabin', fontSize: 14, textAlign:"left", lineHeight:21, color:"#000", opacity: secondary ? .5 : .8 }}>
+        <Text style={{ 
+          fontFamily: 'Cabin', 
+          fontSize: 14 * (big ? 2 : 1), 
+          textAlign:"left", 
+          lineHeight: (14 * (big ? 2 : 1)) * 1.5, 
+          color:"#000", 
+          opacity: secondary ? .5 : .8 
+        }}>
             { children }
         </Text>
     </>;

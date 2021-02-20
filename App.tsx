@@ -2,10 +2,12 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, ScrollView, Dimensions, View } from 'react-native';
 import Recipe from './components/Recipe'
+import RecipeSkeleton from './components/RecipeSkeleton';
 import { Paragraph } from './components/Typography';
 import getAllInArray from './utils/ArrayUtils';
 
 let deviceWidth = Dimensions.get('window').width
+let deviceHeight = Dimensions.get('window').height
 
 type RecipeObject = {
   title: string,
@@ -13,7 +15,8 @@ type RecipeObject = {
   ingredients?: string[],
   quantity?: string[],
   preparingDescription: string,
-  recipeImage: string
+  recipeImage: string,
+  recipeLink?: string
 }
 
 export default function App() {
@@ -31,7 +34,8 @@ export default function App() {
           ingredients: getAllInArray(m,"strIngredient").filter(ing => ing),
           quantity: getAllInArray(m,"strMeasure").filter(mes => mes),
           preparingDescription: m?.strInstructions,
-          recipeImage: m?.strMealThumb
+          recipeImage: m?.strMealThumb,
+          recipeLink: m?.strYoutube
         }]))
         setLoaded(true)
     })
@@ -52,14 +56,14 @@ export default function App() {
                   quantity={r?.quantity}
                   preparingDescription={r?.preparingDescription}
                   recipeImage={r?.recipeImage}
+                  recipeLink={r?.recipeLink}
                 />
               ))
             }
+          <RecipeSkeleton width={deviceWidth} height={deviceHeight}/>
           </ScrollView>
         ) : (
-          <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
-            <Paragraph> Loading Content... </Paragraph>
-          </View>
+          <RecipeSkeleton width={deviceWidth} height={deviceHeight}/>
         )
       }
       <StatusBar style="auto" />
